@@ -16,12 +16,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: npm
-          cache-dependency-path: backend/package-lock.json
 
       - name: Install backend dependencies
         working-directory: backend
-        run: npm install
+        run: npm ci
 
       - name: Start backend server
         working-directory: backend
@@ -41,8 +39,7 @@ jobs:
 
       - name: Run integration tests
         working-directory: backend
-        run: npx jest --runInBand
-
+        run: npm test
 
       - name: Stop backend server
         if: always()
